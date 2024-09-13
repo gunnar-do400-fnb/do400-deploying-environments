@@ -22,13 +22,7 @@ pipeline {
         stage('Build and Push Image') {
             environment { QUAY = credentials('QUAY_TOKEN_GHILLING')}
             steps {
-                sh '''
-                ./mvnw package -DskipTests \
-                -Dquarkus.container-image.push=true \
-                -Dquarkus.container-image.build=true \
-                -Dquarkus.container-image.username=$QUAY_USR \
-                -Dquarkus.container-image.password=$QUAY_PSW
-                '''
+                sh build/build-image.sh
             }
         }
     }
