@@ -22,7 +22,7 @@ pipeline {
         stage('Build and Push Image') {
             environment { QUAY = credentials('QUAY_TOKEN_GHILLING')}
             steps {
-                sh build/build-image.sh
+                sh 'build/build-image.sh'
             }
         }
     }
