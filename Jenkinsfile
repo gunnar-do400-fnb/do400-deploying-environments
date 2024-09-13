@@ -4,6 +4,11 @@ pipeline {
             label 'maven'
         }
     }
+    environment {
+        RHT_OCP4_DEV_USER = 'bgnffr'
+        DEPLOYMENT_STAGE = 'shopping-cart-stage'
+        DEPLOYMENT_PRODUCTION = 'shopping-cart-production'
+    }
     stages {
         stage('Tests') {
             steps {
