@@ -30,5 +30,18 @@ pipeline {
                 sh 'build/build-image.sh'
             }
         }
+        stage('Deploy - Stage') {
+            environment {
+                APP_NAMESPACE = "${RHT_OCP4_DEV_USER}-shopping-cart-stage"
+                QUAY = credentials('QUAY_TOKEN_GHILLING')
+            }
+            steps {
+                sh """
+                    oc set image deployment ${DEPLOYMENT_STAGE} \
+                    shopping-cart-stage=quay.io/ghilling/do400-deploying-environments:build-${BUILD_NUMBER} \
+                    -n ${APP_NAMESPACE} --record
+                """
+            }
+        }
     }
 }
