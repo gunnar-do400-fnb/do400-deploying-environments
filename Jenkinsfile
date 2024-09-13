@@ -23,7 +23,7 @@ pipeline {
             environment { QUAY = credentials('QUAY_TOKEN_GHILLING')}
             steps {
                 sh '''
-                ./mvwn package -DskipTests \
+                ./mvnw package -DskipTests \
                 -Dquarkus.container-image.push=true \
                 -Dquarkus.container-image.build=true \
                 -Dquarkus.container-image.username=$QUAY_USR \
